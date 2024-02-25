@@ -1,2 +1,2 @@
 # VideoClub
-Example project showing a website to consult Video Media using Angular, C#, SQL Server and an external API.
+Example project showing a website to consult and rent Videos using C#, SQL-Server, and Razor Pages in a Database-First approach.
