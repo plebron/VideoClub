@@ -1,0 +1,75 @@
+﻿@model IEnumerable<VideoClub.Models.Pelicula>
+
+@{
+    ViewBag.Title = "Catalogo";
+}
+
+<h2>Catalogo de peliculas y series</h2>
+
+<p>
+    @Html.ActionLink("Registrar pelicula", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reparto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistroNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadEnExistencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distribuidora)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reparto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistroNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadEnExistencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distribuidora.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.PeliculaID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.PeliculaID }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.PeliculaID })
+        </td>
+    </tr>
+}
+
+</table>

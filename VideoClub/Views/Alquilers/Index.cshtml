@@ -1,0 +1,69 @@
+﻿@model IEnumerable<VideoClub.Models.Alquiler>
+
+@{
+    ViewBag.Title = "Reservaciones";
+}
+
+<h2>Lista de reservaciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva reservacion", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaDevolucion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiasExtra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Penalizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPagar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.DNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pelicula.Titulo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEntrega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaDevolucion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiasExtra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Penalizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPagar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.DNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pelicula.Titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.AlquilerID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.AlquilerID }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.AlquilerID })
+        </td>
+    </tr>
+}
+
+</table>

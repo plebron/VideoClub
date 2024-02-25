@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b6c12ff04c74784b23a11e1d640a4e9" Name="Diagram1">
+        <EntityTypeShape EntityType="VideoClubDBModel.Alquiler" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoClubDBModel.Cliente" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoClubDBModel.Distribuidora" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoClubDBModel.Pelicula" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideoClubDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="VideoClubDBModel.FK_Alquiler_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoClubDBModel.FK_Alquiler_Pelicula" ManuallyRouted="false" />
+        <AssociationConnector Association="VideoClubDBModel.FK_Pelicula_Distribuidora" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

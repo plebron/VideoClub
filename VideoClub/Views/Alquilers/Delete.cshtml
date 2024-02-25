@@ -1,0 +1,80 @@
+﻿@model VideoClub.Models.Alquiler
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar una reservacion</h2>
+
+<h3>Esta seguro de querer borrar esto?</h3>
+<div>
+    <h4>Alquiler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDevolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDevolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiasExtra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiasExtra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Penalizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Penalizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPagar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPagar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.DNI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.DNI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pelicula.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pelicula.Titulo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

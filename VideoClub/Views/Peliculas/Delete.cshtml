@@ -1,0 +1,88 @@
+﻿@model VideoClub.Models.Pelicula
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Borrar pelicula o serie</h2>
+
+<h3>Esta seguro de que desea borrar esto?</h3>
+<div>
+    <h4>Pelicula</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Director)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Director)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reparto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reparto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistroNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistroNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadEnExistencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadEnExistencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distribuidora.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distribuidora.Nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar al catalogo", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VideoClubDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alquiler">
+          <Key>
+            <PropertyRef Name="AlquilerID" />
+          </Key>
+          <Property Name="AlquilerID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PeliculaID" Type="varchar" MaxLength="10" />
+          <Property Name="ClienteID" Type="varchar" MaxLength="10" />
+          <Property Name="FechaEntrega" Type="date" />
+          <Property Name="FechaDevolucion" Type="date" />
+          <Property Name="DiasExtra" Type="int" />
+          <Property Name="Penalizacion" Type="money" />
+          <Property Name="TotalPagar" Type="money" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DNI" Type="varchar" MaxLength="15" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="20" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+        </EntityType>
+        <EntityType Name="Distribuidora">
+          <Key>
+            <PropertyRef Name="DistribuidoraId" />
+          </Key>
+          <Property Name="DistribuidoraId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="URL" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Pelicula">
+          <Key>
+            <PropertyRef Name="PeliculaID" />
+          </Key>
+          <Property Name="PeliculaID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="20" />
+          <Property Name="Year" Type="varchar" MaxLength="20" />
+          <Property Name="Director" Type="varchar" MaxLength="20" />
+          <Property Name="Reparto" Type="varchar" MaxLength="50" />
+          <Property Name="RegistroNo" Type="int" />
+          <Property Name="CantidadEnExistencia" Type="int" />
+          <Property Name="Precio" Type="money" />
+          <Property Name="DistribuidoraID" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Alquiler_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Alquiler">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alquiler_Pelicula">
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="0..1" />
+          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelicula">
+              <PropertyRef Name="PeliculaID" />
+            </Principal>
+            <Dependent Role="Alquiler">
+              <PropertyRef Name="PeliculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pelicula_Distribuidora">
+          <End Role="Distribuidora" Type="Self.Distribuidora" Multiplicity="0..1" />
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribuidora">
+              <PropertyRef Name="DistribuidoraId" />
+            </Principal>
+            <Dependent Role="Pelicula">
+              <PropertyRef Name="DistribuidoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VideoClubDBModelStoreContainer">
+          <EntitySet Name="Alquiler" EntityType="Self.Alquiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distribuidora" EntityType="Self.Distribuidora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alquiler_Cliente" Association="Self.FK_Alquiler_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Alquiler" EntitySet="Alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alquiler_Pelicula" Association="Self.FK_Alquiler_Pelicula">
+            <End Role="Pelicula" EntitySet="Pelicula" />
+            <End Role="Alquiler" EntitySet="Alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pelicula_Distribuidora" Association="Self.FK_Pelicula_Distribuidora">
+            <End Role="Distribuidora" EntitySet="Distribuidora" />
+            <End Role="Pelicula" EntitySet="Pelicula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VideoClubDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alquiler">
+          <Key>
+            <PropertyRef Name="AlquilerID" />
+          </Key>
+          <Property Name="AlquilerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PeliculaID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="0" />
+          <Property Name="FechaDevolucion" Type="DateTime" Precision="0" />
+          <Property Name="DiasExtra" Type="Int32" />
+          <Property Name="Penalizacion" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalPagar" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Alquiler_Cliente" FromRole="Alquiler" ToRole="Cliente" />
+          <NavigationProperty Name="Pelicula" Relationship="Self.FK_Alquiler_Pelicula" FromRole="Alquiler" ToRole="Pelicula" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <NavigationProperty Name="Alquilers" Relationship="Self.FK_Alquiler_Cliente" FromRole="Cliente" ToRole="Alquiler" />
+        </EntityType>
+        <EntityType Name="Distribuidora">
+          <Key>
+            <PropertyRef Name="DistribuidoraId" />
+          </Key>
+          <Property Name="DistribuidoraId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Peliculas" Relationship="Self.FK_Pelicula_Distribuidora" FromRole="Distribuidora" ToRole="Pelicula" />
+        </EntityType>
+        <EntityType Name="Pelicula">
+          <Key>
+            <PropertyRef Name="PeliculaID" />
+          </Key>
+          <Property Name="PeliculaID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Director" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Reparto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegistroNo" Type="Int32" />
+          <Property Name="CantidadEnExistencia" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DistribuidoraID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alquilers" Relationship="Self.FK_Alquiler_Pelicula" FromRole="Pelicula" ToRole="Alquiler" />
+          <NavigationProperty Name="Distribuidora" Relationship="Self.FK_Pelicula_Distribuidora" FromRole="Pelicula" ToRole="Distribuidora" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Alquiler_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Alquiler">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alquiler_Pelicula">
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="0..1" />
+          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelicula">
+              <PropertyRef Name="PeliculaID" />
+            </Principal>
+            <Dependent Role="Alquiler">
+              <PropertyRef Name="PeliculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pelicula_Distribuidora">
+          <End Role="Distribuidora" Type="Self.Distribuidora" Multiplicity="0..1" />
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribuidora">
+              <PropertyRef Name="DistribuidoraId" />
+            </Principal>
+            <Dependent Role="Pelicula">
+              <PropertyRef Name="DistribuidoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VideoClubDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alquilers" EntityType="Self.Alquiler" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Distribuidoras" EntityType="Self.Distribuidora" />
+          <EntitySet Name="Peliculas" EntityType="Self.Pelicula" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Alquiler_Cliente" Association="Self.FK_Alquiler_Cliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Alquiler" EntitySet="Alquilers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alquiler_Pelicula" Association="Self.FK_Alquiler_Pelicula">
+            <End Role="Pelicula" EntitySet="Peliculas" />
+            <End Role="Alquiler" EntitySet="Alquilers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pelicula_Distribuidora" Association="Self.FK_Pelicula_Distribuidora">
+            <End Role="Distribuidora" EntitySet="Distribuidoras" />
+            <End Role="Pelicula" EntitySet="Peliculas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VideoClubDBModelStoreContainer" CdmEntityContainer="VideoClubDBEntities">
+          <EntitySetMapping Name="Alquilers">
+            <EntityTypeMapping TypeName="VideoClubDBModel.Alquiler">
+              <MappingFragment StoreEntitySet="Alquiler">
+                <ScalarProperty Name="AlquilerID" ColumnName="AlquilerID" />
+                <ScalarProperty Name="PeliculaID" ColumnName="PeliculaID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="FechaDevolucion" ColumnName="FechaDevolucion" />
+                <ScalarProperty Name="DiasExtra" ColumnName="DiasExtra" />
+                <ScalarProperty Name="Penalizacion" ColumnName="Penalizacion" />
+                <ScalarProperty Name="TotalPagar" ColumnName="TotalPagar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="VideoClubDBModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distribuidoras">
+            <EntityTypeMapping TypeName="VideoClubDBModel.Distribuidora">
+              <MappingFragment StoreEntitySet="Distribuidora">
+                <ScalarProperty Name="DistribuidoraId" ColumnName="DistribuidoraId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peliculas">
+            <EntityTypeMapping TypeName="VideoClubDBModel.Pelicula">
+              <MappingFragment StoreEntitySet="Pelicula">
+                <ScalarProperty Name="PeliculaID" ColumnName="PeliculaID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Reparto" ColumnName="Reparto" />
+                <ScalarProperty Name="RegistroNo" ColumnName="RegistroNo" />
+                <ScalarProperty Name="CantidadEnExistencia" ColumnName="CantidadEnExistencia" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="DistribuidoraID" ColumnName="DistribuidoraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VideoClubDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
